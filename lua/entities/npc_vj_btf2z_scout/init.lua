@@ -7,8 +7,14 @@ ENT.Model = {
 	"models/lazy_zombies_v1/scout.mdl"
 }
 ENT.StartHealth = 125
+ENT.ControllerParams = {
+	ThirdP_Offset = Vector(20, 0, -30),
+	FirstP_Bone = "bip_head",
+	FirstP_Offset = Vector(0, 0, 0), 
+	FirstP_ShrinkBone = true,
+}
 --------------------
-ENT.MeleeAttackDamage = 35
+ENT.MeleeAttackDamage = 15
 ENT.MeleeAttackDamageType = DMG_CLUB
 ENT.AnimTbl_MeleeAttack = "vjges_melee_swing"
 -- ENT.MeleeAttackDistance = 35
@@ -16,6 +22,8 @@ ENT.AnimTbl_MeleeAttack = "vjges_melee_swing"
 ENT.TimeUntilMeleeAttackDamage = 0.2
 ENT.NextMeleeAttackTime = 0.1
 --------------------
+ENT.FootstepSoundTimerWalk = 0.15
+ENT.FootstepSoundTimerRun = 0.15
 ENT.SoundTbl_MedicReceiveHeal = {
 	"vo/scout_thanksfortheheal01.mp3",
 	"vo/scout_thanksfortheheal02.mp3",
@@ -46,10 +54,6 @@ ENT.SoundTbl_Pain = {
 	"vo/scout_painsharp07.mp3",
 	"vo/scout_painsharp08.mp3"
 }
-ENT.SoundTbl_Pain_Fire = {
-	"vo/scout_autoonfire01.mp3",
-	"vo/scout_autoonfire02.mp3"
-}
 ENT.SoundTbl_Death = {
 	"vo/scout_painsevere01.mp3",
 	"vo/scout_painsevere02.mp3",
@@ -58,28 +62,15 @@ ENT.SoundTbl_Death = {
 	"vo/scout_painsevere05.mp3",
 	"vo/scout_painsevere06.mp3"
 }
-ENT.SoundTbl_Death_Critical = {
-	"vo/scout_paincrticialdeath01.mp3",
-	"vo/scout_paincrticialdeath02.mp3",
-	"vo/scout_paincrticialdeath03.mp3"
-}
 --------------------
-ENT.SoundTbl_BattleCry = {
-	"vo/engineer_battlecry01.mp3",
-	"vo/engineer_battlecry02.mp3",
-	"vo/engineer_battlecry03.mp3",
-	"vo/engineer_battlecry04.mp3",
-	"vo/engineer_battlecry05.mp3",
-	"vo/engineer_battlecry06.mp3",
-	"vo/engineer_battlecry07.mp3"
+ENT.BeanTF2Zombs_SoundTbl_BattleCry = {
+	"vo/scout_battlecry01.mp3",
+	"vo/scout_battlecry02.mp3",
+	"vo/scout_battlecry03.mp3",
+	"vo/scout_battlecry04.mp3",
+	"vo/scout_battlecry05.mp3"
 }
-ENT.SoundTbl_GoMove = {
-	"vo/engineer_go01.mp3",
-	"vo/engineer_go02.mp3",
-	"vo/engineer_go03.mp3",
-	"vo/engineer_moveup01.mp3"
-}
-ENT.SoundTbl_MeleeTaunt = {
+ENT.BeanTF2Zombs_SoundTbl_MeleeTaunt = {
 	"vo/scout_meleedare01.mp3",
 	"vo/scout_meleedare02.mp3",
 	"vo/scout_meleedare03.mp3",
@@ -90,14 +81,33 @@ ENT.SoundTbl_MeleeTaunt = {
 	"vo/taunts/scout_taunts05.mp3",
 	"vo/taunts/scout_taunts10.mp3"
 }
-ENT.SoundTbl_SentryAhead = {
-	"vo/engineer_sentryahead01.mp3",
-	"vo/engineer_sentryahead02.mp3"
+ENT.BeanTF2Zombs_SoundTbl_GoMove = {
+	"vo/scout_go01.mp3",
+	"vo/scout_go02.mp3",
+	"vo/scout_go03.mp3",
+	"vo/scout_go03.mp3",
+	"vo/scout_moveup01.mp3",
+	"vo/scout_moveup02.mp3",
+	"vo/scout_moveup03.mp3"
 }
-ENT.SoundTbl_Incoming = {
-	"vo/engineer_incoming01.mp3",
-	"vo/engineer_incoming02.mp3",
-	"vo/engineer_incoming03.mp3"
+ENT.BeanTF2Zombs_SoundTbl_Incoming = {
+	"vo/scout_incoming01.mp3",
+	"vo/scout_incoming02.mp3",
+	"vo/scout_incoming03.mp3"
+}
+ENT.BeanTF2Zombs_SoundTbl_SentryAhead = {
+	"vo/scout_sentryahead01.mp3",
+	"vo/scout_sentryahead02.mp3",
+	"vo/scout_sentryahead03.mp3"
+}
+ENT.BeanTF2Zombs_SoundTbl_Pain_Fire = {
+	"vo/scout_autoonfire01.mp3",
+	"vo/scout_autoonfire02.mp3"
+}
+ENT.BeanTF2Zombs_SoundTbl_Death_Critical = {
+	"vo/scout_paincrticialdeath01.mp3",
+	"vo/scout_paincrticialdeath02.mp3",
+	"vo/scout_paincrticialdeath03.mp3"
 }
 --------------------
 function ENT:Init()
@@ -239,124 +249,106 @@ function ENT:OnKilledEnemy(ent, inflictor, wasLast)
 	if math.random(1,3) == 1 then
 		self.BeanTF2Zombs_OriginalKilledEnemyLines = self.SoundTbl_KilledEnemy
 		self.SoundTbl_KilledEnemy = {
-			"vo/engineer_taunts05.mp3",
-			"vo/engineer_taunts08.mp3",
-			"vo/engineer_wranglekills04.mp3"
+			"vo/scout_domination02.mp3",
+			"vo/scout_domination15.mp3",
+			"vo/scout_domination16.mp3",
+			"vo/scout_misc07.mp3"
 		}
 		if BeanTF2Zombs_NPCsConsideredScout[ent:GetClass()] then
 			self.SoundTbl_KilledEnemy = {
-				"vo/engineer_dominationscout01.mp3",
-				"vo/engineer_dominationscout02.mp3",
-				"vo/engineer_dominationscout03.mp3",
-				"vo/engineer_dominationscout04.mp3",
-				"vo/engineer_dominationscout05.mp3",
-				"vo/engineer_dominationscout06.mp3",
-				"vo/engineer_dominationscout07.mp3",
-				"vo/engineer_dominationscout08.mp3",
-				"vo/engineer_dominationscout09.mp3",
-				"vo/engineer_dominationscout10.mp3",
-				"vo/engineer_dominationscout11.mp3",
-				"vo/engineer_dominationscout12.mp3"
+				"vo/scout_domination13.mp3",
+				"vo/scout_domination07.mp3",
+				"vo/scout_domination05.mp3",
+				"vo/scout_domination20.mp3",
+				"vo/scout_domination19.mp3",
+				"vo/scout_domination21.mp3",
+				"vo/scout_domination14.mp3",
+				"vo/scout_dominationsct01.mp3",
+				"vo/scout_dominationsct02.mp3",
+				"vo/scout_dominationsct03.mp3",
+				"vo/scout_misc07.mp3"
 			}
 		elseif BeanTF2Zombs_NPCsConsideredSoldier[ent:GetClass()] then
 			self.SoundTbl_KilledEnemy = {
-				"vo/engineer_dominationsoldier01.mp3",
-				"vo/engineer_dominationsoldier02.mp3",
-				"vo/engineer_dominationsoldier03.mp3",
-				"vo/engineer_dominationsoldier04.mp3",
-				"vo/engineer_dominationsoldier05.mp3",
-				"vo/engineer_dominationsoldier06.mp3",
-				"vo/engineer_dominationsoldier07.mp3",
-				"vo/engineer_dominationsoldier08.mp3"
+				"vo/scout_dominationsol01.mp3",
+				"vo/scout_dominationsol02.mp3",
+				"vo/scout_dominationsol03.mp3",
+				"vo/scout_dominationsol04.mp3",
+				"vo/scout_dominationsol05.mp3",
+				"vo/scout_dominationsol06.mp3"
 			}
 		elseif BeanTF2Zombs_NPCsConsideredPyro[ent:GetClass()] then
 			self.SoundTbl_KilledEnemy = {
-				"vo/engineer_dominationpyro01.mp3",
-				"vo/engineer_dominationpyro02.mp3",
-				"vo/engineer_dominationpyro03.mp3",
-				"vo/engineer_dominationpyro04.mp3",
-				"vo/engineer_dominationpyro05.mp3",
-				"vo/engineer_dominationpyro06.mp3",
-				"vo/engineer_dominationpyro07.mp3",
-				"vo/engineer_dominationpyro08.mp3",
-				"vo/engineer_dominationpyro09.mp3"
+				"vo/scout_domination06.mp3",
+				"vo/scout_dominationpyr01.mp3",
+				"vo/scout_dominationpyr02.mp3",
+				"vo/scout_dominationpyr03.mp3",
+				"vo/scout_dominationpyr04.mp3",
+				"vo/scout_dominationpyr05.mp3",
+				"vo/scout_dominationpyr06.mp3",
+				"vo/scout_misc08.mp3"
 			}
 		elseif BeanTF2Zombs_NPCsConsideredDemoman[ent:GetClass()] then
 			self.SoundTbl_KilledEnemy = {
-				"vo/engineer_dominationdemoman01.mp3",
-				"vo/engineer_dominationdemoman02.mp3",
-				"vo/engineer_dominationdemoman03.mp3",
-				"vo/engineer_dominationdemoman04.mp3",
-				"vo/engineer_dominationdemoman05.mp3",
-				"vo/engineer_dominationdemoman06.mp3"
+				"vo/scout_domination01.mp3",
+				"vo/scout_domination10.mp3",
+				"vo/scout_dominationdem01.mp3",
+				"vo/scout_dominationdem02.mp3",
+				"vo/scout_dominationdem03.mp3",
+				"vo/scout_dominationdem04.mp3",
+				"vo/scout_dominationdem05.mp3"
 			}
 		elseif BeanTF2Zombs_NPCsConsideredHeavy[ent:GetClass()] then
 			self.SoundTbl_KilledEnemy = {
-				"vo/engineer_dominationheavy01.mp3",
-				"vo/engineer_dominationheavy02.mp3",
-				"vo/engineer_dominationheavy03.mp3",
-				"vo/engineer_dominationheavy04.mp3",
-				"vo/engineer_dominationheavy05.mp3",
-				"vo/engineer_dominationheavy06.mp3",
-				"vo/engineer_dominationheavy07.mp3",
-				"vo/engineer_dominationheavy08.mp3",
-				"vo/engineer_dominationheavy09.mp3",
-				"vo/engineer_dominationheavy10.mp3",
-				"vo/engineer_dominationheavy11.mp3",
-				"vo/engineer_dominationheavy12.mp3",
-				"vo/engineer_dominationheavy13.mp3",
-				"vo/engineer_dominationheavy14.mp3",
-				"vo/engineer_dominationheavy15.mp3"
+				"vo/scout_domination08.mp3",
+				"vo/scout_domination09.mp3",
+				"vo/scout_dominationhvy01.mp3",
+				"vo/scout_dominationhvy02.mp3",
+				"vo/scout_dominationhvy03.mp3",
+				"vo/scout_dominationhvy04.mp3",
+				"vo/scout_dominationhvy05.mp3",
+				"vo/scout_dominationhvy06.mp3",
+				"vo/scout_dominationhvy07.mp3",
+				"vo/scout_dominationhvy08.mp3",
+				"vo/scout_dominationhvy09.mp3",
+				"vo/scout_dominationhvy10.mp3"
 			}
 		elseif BeanTF2Zombs_NPCsConsideredEngineer[ent:GetClass()] then
 			self.SoundTbl_KilledEnemy = {
-				"vo/engineer_dominationengineer01.mp3",
-				"vo/engineer_dominationengineer02.mp3",
-				"vo/engineer_dominationengineer03.mp3",
-				"vo/engineer_dominationengineer04.mp3",
-				"vo/engineer_dominationengineer05.mp3",
-				"vo/engineer_dominationengineer06.mp3",
-				"vo/engineer_dominationengineer07.mp3",
-				"vo/engineer_dominationengineer08.mp3",
-				"vo/engineer_dominationengineer09.mp3"
+				"vo/scout_domination17.mp3",
+				"vo/scout_dominationeng01.mp3",
+				"vo/scout_dominationeng02.mp3",
+				"vo/scout_dominationeng03.mp3",
+				"vo/scout_dominationeng04.mp3",
+				"vo/scout_dominationeng05.mp3",
+				"vo/scout_dominationeng06.mp3"
 			}
 		elseif BeanTF2Zombs_NPCsConsideredMedic[ent:GetClass()] then
 			self.SoundTbl_KilledEnemy = {
-				"vo/engineer_dominationmedic01.mp3",
-				"vo/engineer_dominationmedic02.mp3",
-				"vo/engineer_dominationmedic03.mp3",
-				"vo/engineer_dominationmedic04.mp3",
-				"vo/engineer_dominationmedic05.mp3",
-				"vo/engineer_dominationmedic06.mp3",
-				"vo/engineer_dominationmedic07.mp3",
-				"vo/engineer_dominationmedic08.mp3"
+				"vo/scout_misc02.mp3",
+				"vo/scout_dominationmed01.mp3",
+				"vo/scout_dominationmed02.mp3",
+				"vo/scout_dominationmed03.mp3",
+				"vo/scout_dominationmed04.mp3",
+				"vo/scout_dominationmed05.mp3",
+				"vo/scout_dominationmed06.mp3"
 			}
 		elseif BeanTF2Zombs_NPCsConsideredSniper[ent:GetClass()] then
 			self.SoundTbl_KilledEnemy = {
-				"vo/engineer_dominationsniper01.mp3",
-				"vo/engineer_dominationsniper02.mp3",
-				"vo/engineer_dominationsniper03.mp3",
-				"vo/engineer_dominationsniper04.mp3",
-				"vo/engineer_dominationsniper05.mp3",
-				"vo/engineer_dominationsniper06.mp3",
-				"vo/engineer_dominationsniper07.mp3",
-				"vo/engineer_dominationsniper08.mp3"
+				"vo/scout_domination12.mp3",
+				"vo/scout_dominationsnp01.mp3",
+				"vo/scout_dominationsnp02.mp3",
+				"vo/scout_dominationsnp03.mp3",
+				"vo/scout_dominationsnp04.mp3",
+				"vo/scout_dominationsnp05.mp3"
 			}
 		elseif BeanTF2Zombs_NPCsConsideredSpy[ent:GetClass()] then
 			self.SoundTbl_KilledEnemy = {
-				"vo/engineer_dominationspy01.mp3",
-				"vo/engineer_dominationspy02.mp3",
-				"vo/engineer_dominationspy03.mp3",
-				"vo/engineer_dominationspy04.mp3",
-				"vo/engineer_dominationspy05.mp3",
-				"vo/engineer_dominationspy06.mp3",
-				"vo/engineer_dominationspy07.mp3",
-				"vo/engineer_dominationspy08.mp3",
-				"vo/engineer_dominationspy09.mp3",
-				"vo/engineer_dominationspy10.mp3",
-				"vo/engineer_dominationspy11.mp3",
-				"vo/engineer_dominationspy12.mp3",
-				"vo/engineer_dominationspy13.mp3"
+				"vo/scout_award10.mp3",
+				"vo/scout_dominationspy01.mp3",
+				"vo/scout_dominationspy02.mp3",
+				"vo/scout_dominationspy03.mp3",
+				"vo/scout_dominationspy04.mp3"
 			}
 		end
 		timer.Simple(0.1, function() if IsValid(self) then

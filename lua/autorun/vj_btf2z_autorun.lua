@@ -18,6 +18,8 @@ if VJExists == true then
 	VJ.AddNPC("Zombie Sniper","npc_vj_btf2z_sniper",vCat)
 	VJ.AddNPC("Zombie Spy","npc_vj_btf2z_spy",vCat)
 
+	VJ.AddNPC("Pumpkin Bomb","obj_vj_btf2z_pb",vCat)
+
 -- !!!!!! DON'T TOUCH ANYTHING BELOW THIS !!!!!! -------------------------------------------------------------------------------------------------------------------------
 	AddCSLuaFile()
 	VJ.AddAddonProperty(AddonName, AddonType)

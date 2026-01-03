@@ -12,8 +12,6 @@ ENT.ControllerParams = {
 	FirstP_Bone = "bip_head",
 	FirstP_Offset = Vector(0, 2.5, 0), 
 	FirstP_ShrinkBone = true,
-	-- FirstP_CameraBoneAng = 0, -- Should the camera's angle be affected by the bone's angle? | 0 = No, 1 = Pitch, 2 = Yaw, 3 = Roll
-	-- FirstP_CameraBoneAng_Offset = 0, -- How much should the camera's angle be rotated by? | Useful for weird bone angles
 }
 --------------------
 ENT.MeleeAttackDamageType = DMG_CLUB
@@ -65,26 +63,14 @@ ENT.SoundTbl_Pain = {
 	"vo/demoman_painsharp06.mp3",
 	"vo/demoman_painsharp07.mp3"
 }
-ENT.SoundTbl_Pain_Fire = {
-	"vo/demoman_autoonfire01.mp3",
-	"vo/demoman_autoonfire02.mp3",
-	"vo/demoman_autoonfire03.mp3"
-}
 ENT.SoundTbl_Death = {
 	"vo/demoman_painsevere01.mp3",
 	"vo/demoman_painsevere02.mp3",
 	"vo/demoman_painsevere03.mp3",
 	"vo/demoman_painsevere04.mp3"
 }
-ENT.SoundTbl_Death_Critical = {
-	"vo/demoman_paincrticialdeath01.mp3",
-	"vo/demoman_paincrticialdeath02.mp3",
-	"vo/demoman_paincrticialdeath03.mp3",
-	"vo/demoman_paincrticialdeath04.mp3",
-	"vo/demoman_paincrticialdeath05.mp3"
-}
 --------------------
-ENT.SoundTbl_BattleCry = {
+ENT.BeanTF2Zombs_SoundTbl_BattleCry = {
 	"vo/demoman_battlecry01.mp3",
 	"vo/demoman_battlecry02.mp3",
 	"vo/demoman_battlecry03.mp3",
@@ -93,7 +79,12 @@ ENT.SoundTbl_BattleCry = {
 	"vo/demoman_battlecry06.mp3",
 	"vo/demoman_battlecry07.mp3"
 }
-ENT.SoundTbl_GoMove = {
+ENT.BeanTF2Zombs_SoundTbl_MeleeTaunt = {
+	"vo/taunts/demoman_taunts03.mp3",
+	"vo/taunts/demoman_taunts05.mp3",
+	"vo/taunts/demoman_taunts14.mp3"
+}
+ENT.BeanTF2Zombs_SoundTbl_GoMove = {
 	"vo/demoman_go01.mp3",
 	"vo/demoman_go02.mp3",
 	"vo/demoman_go03.mp3",
@@ -101,25 +92,32 @@ ENT.SoundTbl_GoMove = {
 	"vo/demoman_moveup02.mp3",
 	"vo/demoman_moveup03.mp3"
 }
-ENT.SoundTbl_MeleeTaunt = {
-	"vo/taunts/demoman_taunts03.mp3",
-	"vo/taunts/demoman_taunts05.mp3",
-	"vo/taunts/demoman_taunts14.mp3"
+ENT.BeanTF2Zombs_SoundTbl_Incoming = {
+	"vo/demoman_incoming01.mp3",
+	"vo/demoman_incoming02.mp3",
+	"vo/demoman_incoming03.mp3"
 }
-ENT.SoundTbl_SentryAhead = {
+ENT.BeanTF2Zombs_SoundTbl_SentryAhead = {
 	"vo/demoman_sentryahead01.mp3",
 	"vo/demoman_sentryahead02.mp3",
 	"vo/demoman_sentryahead03.mp3"
 }
-ENT.SoundTbl_DemoBurp = {
+ENT.BeanTF2Zombs_SoundTbl_Pain_Fire = {
+	"vo/demoman_autoonfire01.mp3",
+	"vo/demoman_autoonfire02.mp3",
+	"vo/demoman_autoonfire03.mp3"
+}
+ENT.BeanTF2Zombs_SoundTbl_Death_Critical = {
+	"vo/demoman_paincrticialdeath01.mp3",
+	"vo/demoman_paincrticialdeath02.mp3",
+	"vo/demoman_paincrticialdeath03.mp3",
+	"vo/demoman_paincrticialdeath04.mp3",
+	"vo/demoman_paincrticialdeath05.mp3"
+}
+ENT.BeanTF2Zombs_SoundTbl_DemoBurp = {
 	"vo/burp04.mp3",
 	"vo/burp02.mp3",
 	"vo/burp06.mp3"
-}
-ENT.SoundTbl_Incoming = {
-	"vo/demoman_incoming01.mp3",
-	"vo/demoman_incoming02.mp3",
-	"vo/demoman_incoming03.mp3"
 }
 ENT.BeanTF2Zombs_WeaponAttachment = "effect_hand_r"
 --------------------
@@ -169,10 +167,10 @@ function ENT:BeanTF2Zombs_Taunt()
 		-- self:PlayAnim("vjseq_layer_taunt_laugh", true, 5)
 		-- self:PlayAnim("vjseq_layer_taunt_the_scaredycat_soldier", true, 5)
 		self:PlayAnim("vjseq_layer_taunt_the_scaredycat_demoman", true, 5)
-		self:PlaySoundSystem("Speech",self.SoundTbl_Death_Critical)
+		self:PlaySoundSystem("Speech",self.BeanTF2Zombs_SoundTbl_Death_Critical)
 		self.WeaponModel:SetNoDraw(true)
 		timer.Simple(4,function() if IsValid(self) then
-			self:PlaySoundSystem("Speech",self.SoundTbl_ScaredyCat)
+			self:PlaySoundSystem("Speech",self.BeanTF2Zombs_SoundTbl_ScaredyCat)
 		end end)
 		timer.Simple(5,function() if IsValid(self) then
 			self.WeaponModel:SetNoDraw(false)
@@ -192,7 +190,7 @@ function ENT:BeanTF2Zombs_Taunt()
 		self:PlayAnim("vjseq_layer_taunt03", true, 4)
 		self:PlaySoundSystem("Speech","vo/demoman_goodjob01.mp3")
 		timer.Simple(3.5,function() if IsValid(self) then
-			VJ.EmitSound(self,self.SoundTbl_DemoBurp,80,100)
+			VJ.EmitSound(self,self.BeanTF2Zombs_SoundTbl_DemoBurp,80,100)
 		end end)
 
 	end

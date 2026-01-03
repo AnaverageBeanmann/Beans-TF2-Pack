@@ -7,6 +7,12 @@ ENT.Model = {
 	"models/lazy_zombies_v1/sniper.mdl"
 }
 ENT.StartHealth = 125
+ENT.ControllerParams = {
+	ThirdP_Offset = Vector(20, 0, -30),
+	FirstP_Bone = "bip_head",
+	FirstP_Offset = Vector(0, 0, 0), 
+	FirstP_ShrinkBone = true,
+}
 --------------------
 ENT.AnimTbl_MeleeAttack = "vjges_melee_swing"
 -- ENT.MeleeAttackDistance = 45
@@ -14,6 +20,8 @@ ENT.AnimTbl_MeleeAttack = "vjges_melee_swing"
 ENT.TimeUntilMeleeAttackDamage = 0.3
 -- ENT.NextMeleeAttackTime = 0.8
 --------------------
+ENT.FootstepSoundTimerWalk = 0.25
+ENT.FootstepSoundTimerRun = 0.25
 ENT.SoundTbl_MedicReceiveHeal = {
 	"vo/sniper_thanksfortheheal01.mp3",
 	"vo/sniper_thanksfortheheal02.mp3",
@@ -47,25 +55,14 @@ ENT.SoundTbl_Pain = {
 	"vo/sniper_painsharp03.mp3",
 	"vo/sniper_painsharp04.mp3"
 }
-ENT.SoundTbl_Pain_Fire = {
-	"vo/sniper_autoonfire01.mp3",
-	"vo/sniper_autoonfire02.mp3",
-	"vo/sniper_autoonfire03.mp3",
-}
 ENT.SoundTbl_Death = {
 	"vo/sniper_painsevere01.mp3",
 	"vo/sniper_painsevere02.mp3",
 	"vo/sniper_painsevere03.mp3",
 	"vo/sniper_painsevere04.mp3"
 }
-ENT.SoundTbl_Death_Critical = {
-	"vo/sniper_paincrticialdeath01.mp3",
-	"vo/sniper_paincrticialdeath02.mp3",
-	"vo/sniper_paincrticialdeath03.mp3",
-	"vo/sniper_paincrticialdeath04.mp3",
-}
 --------------------
-ENT.SoundTbl_BattleCry = {
+ENT.BeanTF2Zombs_SoundTbl_BattleCry = {
 	"vo/sniper_battlecry01.mp3",
 	"vo/sniper_battlecry02.mp3",
 	"vo/sniper_battlecry03.mp3",
@@ -73,14 +70,7 @@ ENT.SoundTbl_BattleCry = {
 	"vo/sniper_battlecry05.mp3",
 	"vo/sniper_battlecry06.mp3"
 }
-ENT.SoundTbl_GoMove = {
-	"vo/sniper_go01.mp3",
-	"vo/sniper_go02.mp3",
-	"vo/sniper_go03.mp3",
-	"vo/sniper_moveup01.mp3",
-	"vo/sniper_moveup02.mp3"
-}
-ENT.SoundTbl_MeleeTaunt = {
+ENT.BeanTF2Zombs_SoundTbl_MeleeTaunt = {
 	"vo/sniper_meleedare01.mp3",
 	"vo/sniper_meleedare02.mp3",
 	"vo/sniper_meleedare03.mp3",
@@ -91,11 +81,29 @@ ENT.SoundTbl_MeleeTaunt = {
 	"vo/sniper_meleedare08.mp3",
 	"vo/sniper_meleedare09.mp3"
 }
-ENT.SoundTbl_SentryAhead = "vo/sniper_sentryahead01.mp3"
-ENT.SoundTbl_Incoming = {
+ENT.BeanTF2Zombs_SoundTbl_GoMove = {
+	"vo/sniper_go01.mp3",
+	"vo/sniper_go02.mp3",
+	"vo/sniper_go03.mp3",
+	"vo/sniper_moveup01.mp3",
+	"vo/sniper_moveup02.mp3"
+}
+ENT.BeanTF2Zombs_SoundTbl_Incoming = {
 	"vo/sniper_incoming01.mp3",
 	"vo/sniper_incoming02.mp3",
 	"vo/sniper_incoming03.mp3"
+}
+ENT.BeanTF2Zombs_SoundTbl_SentryAhead = "vo/sniper_sentryahead01.mp3"
+ENT.BeanTF2Zombs_SoundTbl_Pain_Fire = {
+	"vo/sniper_autoonfire01.mp3",
+	"vo/sniper_autoonfire02.mp3",
+	"vo/sniper_autoonfire03.mp3",
+}
+ENT.BeanTF2Zombs_SoundTbl_Death_Critical = {
+	"vo/sniper_paincrticialdeath01.mp3",
+	"vo/sniper_paincrticialdeath02.mp3",
+	"vo/sniper_paincrticialdeath03.mp3",
+	"vo/sniper_paincrticialdeath04.mp3",
 }
 ENT.BeanTF2Zombs_WeaponAttachment = "effect_hand_r"
 ENT.BeanTF2Zombs_SniperMeleeTauntLines = {

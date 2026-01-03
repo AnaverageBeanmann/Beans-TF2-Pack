@@ -7,6 +7,12 @@ ENT.Model = {
 	"models/lazy_zombies_v1/pyro.mdl"
 }
 ENT.StartHealth = 175
+ENT.ControllerParams = {
+	ThirdP_Offset = Vector(20, 0, -30),
+	FirstP_Bone = "bip_head",
+	FirstP_Offset = Vector(0, 0, 0), 
+	FirstP_ShrinkBone = true,
+}
 --------------------
 ENT.AllowIgnition = false
 --------------------
@@ -14,6 +20,8 @@ ENT.AllowIgnition = false
 ENT.AnimTbl_MeleeAttack = "vjges_attackstand_melee"
 ENT.TimeUntilMeleeAttackDamage = 0.4
 --------------------
+ENT.FootstepSoundTimerWalk = 0.25
+ENT.FootstepSoundTimerRun = 0.25
 ENT.SoundTbl_MedicReceiveHeal = "vo/pyro_thanksfortheheal01.mp3"
 ENT.SoundTbl_CallForHelp = "vo/pyro_helpme01.mp3"
 ENT.SoundTbl_MeleeAttackMiss = "weapons/cbar_miss1.wav"
@@ -35,27 +43,27 @@ ENT.SoundTbl_Death = {
 	"vo/pyro_painsevere05.mp3",
 	"vo/pyro_painsevere06.mp3"
 }
-ENT.SoundTbl_Death_Critical = {
-	"vo/pyro_paincrticialdeath01.mp3",
-	"vo/pyro_paincrticialdeath02.mp3",
-	"vo/pyro_paincrticialdeath03.mp3"
-}
 --------------------
-ENT.SoundTbl_BattleCry = {
+ENT.BeanTF2Zombs_SoundTbl_BattleCry = {
 	"vo/pyro_battlecry01.mp3",
 	"vo/pyro_battlecry02.mp3"
 }
-ENT.SoundTbl_GoMove = {
-	"vo/pyro_go01.mp3",
-	"vo/pyro_moveup01.mp3"
-}
-ENT.SoundTbl_MeleeTaunt = {
+ENT.BeanTF2Zombs_SoundTbl_MeleeTaunt = {
 	"vo/pyro_specialcompleted01.mp3",
 	"vo/pyro_autocappedintelligence01.mp3",
 	"vo/pyro_laughevil02.mp3"
 }
-ENT.SoundTbl_SentryAhead = "vo/pyro_sentryahead01.mp3"
-ENT.SoundTbl_Incoming = "vo/pyro_incoming01.mp3"
+ENT.BeanTF2Zombs_SoundTbl_GoMove = {
+	"vo/pyro_go01.mp3",
+	"vo/pyro_moveup01.mp3"
+}
+ENT.BeanTF2Zombs_SoundTbl_Incoming = "vo/pyro_incoming01.mp3"
+ENT.BeanTF2Zombs_SoundTbl_SentryAhead = "vo/pyro_sentryahead01.mp3"
+ENT.BeanTF2Zombs_SoundTbl_Death_Critical = {
+	"vo/pyro_paincrticialdeath01.mp3",
+	"vo/pyro_paincrticialdeath02.mp3",
+	"vo/pyro_paincrticialdeath03.mp3"
+}
 --------------------
 function ENT:Init()
 
@@ -106,6 +114,34 @@ function ENT:BeanTF2Zombs_Taunt()
 			self:PlaySoundSystem("Speech","player/taunt_rockstar_end.wav")
 		end end)
 
+	end
+
+end
+--------------------
+function ENT:OnKilledEnemy(ent, inflictor, wasLast)
+
+	-- self.BeanTF2Zombs_TotalKills = self.BeanTF2Zombs_TotalKills + 1
+
+	-- if math.random(1,1) == 1 && (!IsValid(self:GetEnemy()) or (IsValid(self:GetEnemy()) && (self:GetPos():Distance(self:GetEnemy():GetPos()) >= 500 or !self:GetEnemy().VJ_ID_Living))) then
+	if math.random(1,3) == 1 then
+		self.BeanTF2Zombs_OriginalKilledEnemyLines = self.SoundTbl_KilledEnemy
+		self.SoundTbl_KilledEnemy = {
+			"vo/pyro_laughevil01.mp3",
+			"vo/pyro_laughevil02.mp3",
+			"vo/pyro_laughlong01.mp3",
+			"vo/pyro_laughhappy01.mp3"
+		}
+		timer.Simple(0.1, function() if IsValid(self) then
+			self.SoundTbl_KilledEnemy = self.BeanTF2Zombs_OriginalKilledEnemyLines
+			-- self.BeanTF2Zombs_TotalKills = 0
+		end end)
+	-- else
+	end
+
+	if math.random(1,5) == 1 then
+		timer.Simple(math.random(0.30,0.5), function() if IsValid(self) then
+			self:BeanTF2Zombs_Taunt()
+		end end)
 	end
 
 end

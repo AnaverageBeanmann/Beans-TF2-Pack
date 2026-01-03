@@ -7,6 +7,12 @@ ENT.Model = {
 	"models/lazy_zombies_v1/engineer.mdl"
 }
 ENT.StartHealth = 125
+ENT.ControllerParams = {
+	ThirdP_Offset = Vector(20, 0, -30),
+	FirstP_Bone = "bip_head",
+	FirstP_Offset = Vector(0, 0, 0), 
+	FirstP_ShrinkBone = true,
+}
 --------------------
 ENT.AnimTbl_Flinch = {
 	"vjges_a_flinch01",
@@ -21,6 +27,8 @@ ENT.AnimTbl_MeleeAttack = "vjges_melee_swing"
 ENT.TimeUntilMeleeAttackDamage = 0.45
 -- ENT.NextMeleeAttackTime = 0.8
 --------------------
+ENT.FootstepSoundTimerWalk = 0.24
+ENT.FootstepSoundTimerRun = 0.24
 ENT.SoundTbl_MedicReceiveHeal = {
 	"vo/engineer_thanksfortheheal01.mp3",
 	"vo/engineer_thanksfortheheal02.mp3"
@@ -60,11 +68,6 @@ ENT.SoundTbl_Pain = {
 	"vo/engineer_painsharp07.mp3",
 	"vo/engineer_painsharp08.mp3"
 }
-ENT.SoundTbl_Pain_Fire = {
-	"vo/engineer_autoonfire01.mp3",
-	"vo/engineer_autoonfire02.mp3",
-	"vo/engineer_autoonfire03.mp3",
-}
 ENT.SoundTbl_Death = {
 	"vo/engineer_painsevere01.mp3",
 	"vo/engineer_painsevere02.mp3",
@@ -74,16 +77,8 @@ ENT.SoundTbl_Death = {
 	"vo/engineer_painsevere06.mp3",
 	"vo/engineer_painsevere07.mp3"
 }
-ENT.SoundTbl_Death_Critical = {
-	"vo/engineer_paincrticialdeath01.mp3",
-	"vo/engineer_paincrticialdeath02.mp3",
-	"vo/engineer_paincrticialdeath03.mp3",
-	"vo/engineer_paincrticialdeath04.mp3",
-	"vo/engineer_paincrticialdeath05.mp3",
-	"vo/engineer_paincrticialdeath06.mp3"
-}
 --------------------
-ENT.SoundTbl_BattleCry = {
+ENT.BeanTF2Zombs_SoundTbl_BattleCry = {
 	"vo/engineer_battlecry01.mp3",
 	"vo/engineer_battlecry03.mp3",
 	"vo/engineer_battlecry04.mp3",
@@ -91,13 +86,7 @@ ENT.SoundTbl_BattleCry = {
 	"vo/engineer_battlecry06.mp3",
 	"vo/engineer_battlecry07.mp3"
 }
-ENT.SoundTbl_GoMove = {
-	"vo/engineer_go01.mp3",
-	"vo/engineer_go02.mp3",
-	"vo/engineer_go03.mp3",
-	"vo/engineer_moveup01.mp3"
-}
-ENT.SoundTbl_MeleeTaunt = {
+ENT.BeanTF2Zombs_SoundTbl_MeleeTaunt = {
 	"vo/engineer_meleedare01.mp3",
 	"vo/engineer_meleedare02.mp3",
 	"vo/engineer_meleedare03.mp3",
@@ -109,14 +98,33 @@ ENT.SoundTbl_MeleeTaunt = {
 	"vo/taunts/engineer_taunts10.mp3",
 	"vo/taunts/engineer_taunts12.mp3"
 }
-ENT.SoundTbl_SentryAhead = {
-	"vo/engineer_sentryahead01.mp3",
-	"vo/engineer_sentryahead02.mp3"
+ENT.BeanTF2Zombs_SoundTbl_GoMove = {
+	"vo/engineer_go01.mp3",
+	"vo/engineer_go02.mp3",
+	"vo/engineer_go03.mp3",
+	"vo/engineer_moveup01.mp3"
 }
-ENT.SoundTbl_Incoming = {
+ENT.BeanTF2Zombs_SoundTbl_Incoming = {
 	"vo/engineer_incoming01.mp3",
 	"vo/engineer_incoming02.mp3",
 	"vo/engineer_incoming03.mp3"
+}
+ENT.BeanTF2Zombs_SoundTbl_SentryAhead = {
+	"vo/engineer_sentryahead01.mp3",
+	"vo/engineer_sentryahead02.mp3"
+}
+ENT.BeanTF2Zombs_SoundTbl_Pain_Fire = {
+	"vo/engineer_autoonfire01.mp3",
+	"vo/engineer_autoonfire02.mp3",
+	"vo/engineer_autoonfire03.mp3",
+}
+ENT.BeanTF2Zombs_SoundTbl_Death_Critical = {
+	"vo/engineer_paincrticialdeath01.mp3",
+	"vo/engineer_paincrticialdeath02.mp3",
+	"vo/engineer_paincrticialdeath03.mp3",
+	"vo/engineer_paincrticialdeath04.mp3",
+	"vo/engineer_paincrticialdeath05.mp3",
+	"vo/engineer_paincrticialdeath06.mp3"
 }
 ENT.BeanTF2Zombs_WeaponAttachment = "effect_hand_r"
 --------------------

@@ -11,8 +11,6 @@ ENT.ControllerParams = {
 	FirstP_Bone = "bip_head",
 	FirstP_Offset = Vector(0, 0, 0), 
 	FirstP_ShrinkBone = true,
-	-- FirstP_CameraBoneAng = 0, -- Should the camera's angle be affected by the bone's angle? | 0 = No, 1 = Pitch, 2 = Yaw, 3 = Roll
-	-- FirstP_CameraBoneAng_Offset = 0, -- How much should the camera's angle be rotated by? | Useful for weird bone angles
 }
 --------------------
 ENT.UsePoseParameterMovement = true
@@ -20,10 +18,12 @@ ENT.UsePoseParameterMovement = true
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE"}
 --------------------
 ENT.BloodColor = VJ.BLOOD_COLOR_RED
+ENT.BloodDecalUseGMod = true
+ENT.BloodParticle = {"tf2_blood_impact_red_01"} -- figure out what the default blood particles are for now, worry about the tf2 ones later
+ENT.HasBloodPool = false
 ENT.AnimTbl_Flinch = "vjges_a_flinch01"
 --------------------
-ENT.MeleeAttackDamage = 65
--- ENT.MeleeAttackDamage = 35
+ENT.MeleeAttackDamage = 30 -- original is 65
 -- ENT.MeleeAttackDamageType = bit.bor(DMG_CLUB, DMG_SLASH)
 ENT.MeleeAttackDamageType = DMG_SLASH
 ENT.AnimTbl_MeleeAttack = "vjges_attack_stand_melee"
@@ -94,11 +94,6 @@ ENT.SoundTbl_Pain = {
 	"vo/soldier_painsharp07.mp3",
 	"vo/soldier_painsharp08.mp3"
 }
-ENT.SoundTbl_Pain_Fire = {
-	"vo/soldier_autoonfire01.mp3",
-	"vo/soldier_autoonfire02.mp3",
-	"vo/soldier_autoonfire03.mp3",
-}
 -- ENT.SoundTbl_Impact = "VJ.Impact.Flesh_Alien" -- EFFECT
 ENT.SoundTbl_DamageByPlayer = false
 ENT.SoundTbl_Death = {
@@ -108,12 +103,6 @@ ENT.SoundTbl_Death = {
 	"vo/soldier_painsevere04.mp3",
 	"vo/soldier_painsevere05.mp3",
 	"vo/soldier_painsevere06.mp3"
-}
-ENT.SoundTbl_Death_Critical = {
-	"vo/soldier_paincrticialdeath01.mp3",
-	"vo/soldier_paincrticialdeath02.mp3",
-	"vo/soldier_paincrticialdeath03.mp3",
-	"vo/soldier_paincrticialdeath04.mp3",
 }
 ENT.PainSoundChance = 1
 -- ENT.KilledEnemySoundChance = 3
@@ -127,22 +116,14 @@ ENT.BeanTF2Zombs_NextFirePainTime = CurTime()
 ENT.BeanTF2Zombs_PlayedIgniteSound = false
 ENT.BeanTF2Zombs_CanPlayBurningVoiceLine = true
 ENT.BeanTF2Zombs_PlayingBurningVoiceLine = false
-ENT.SoundTbl_BattleCry = {
+ENT.BeanTF2Zombs_SoundTbl_BattleCry = {
 	"vo/soldier_battlecry01.mp3",
 	"vo/soldier_battlecry02.mp3",
 	"vo/soldier_battlecry03.mp3",
 	"vo/soldier_battlecry04.mp3",
 	"vo/soldier_battlecry05.mp3"
 }
-ENT.SoundTbl_GoMove = {
-	"vo/soldier_go01.mp3",
-	"vo/soldier_go02.mp3",
-	"vo/soldier_go03.mp3",
-	"vo/soldier_moveup01.mp3",
-	"vo/soldier_moveup02.mp3",
-	"vo/soldier_moveup03.mp3"
-}
-ENT.SoundTbl_MeleeTaunt = {
+ENT.BeanTF2Zombs_SoundTbl_MeleeTaunt = {
 	"vo/taunts/soldier_taunts03.mp3",
 	"vo/taunts/soldier_taunts08.mp3",
 	"vo/taunts/soldier_taunts14.mp3",
@@ -150,28 +131,41 @@ ENT.SoundTbl_MeleeTaunt = {
 	"vo/taunts/soldier_taunts19.mp3",
 	"vo/taunts/soldier_taunts20.mp3",
 }
-ENT.SoundTbl_SentryAhead = {
+ENT.BeanTF2Zombs_SoundTbl_GoMove = {
+	"vo/soldier_go01.mp3",
+	"vo/soldier_go02.mp3",
+	"vo/soldier_go03.mp3",
+	"vo/soldier_moveup01.mp3",
+	"vo/soldier_moveup02.mp3",
+	"vo/soldier_moveup03.mp3"
+}
+ENT.BeanTF2Zombs_SoundTbl_Incoming = "vo/soldier_incoming01.mp3"
+ENT.BeanTF2Zombs_SoundTbl_SentryAhead = {
 	"vo/soldier_sentryahead01.mp3",
 	"vo/soldier_sentryahead02.mp3",
 	"vo/soldier_sentryahead03.mp3"
 }
-ENT.SoundTbl_ScaredyCat = {
+ENT.BeanTF2Zombs_SoundTbl_Pain_Fire = {
+	"vo/soldier_autoonfire01.mp3",
+	"vo/soldier_autoonfire02.mp3",
+	"vo/soldier_autoonfire03.mp3",
+}
+ENT.BeanTF2Zombs_SoundTbl_Death_Critical = {
+	"vo/soldier_paincrticialdeath01.mp3",
+	"vo/soldier_paincrticialdeath02.mp3",
+	"vo/soldier_paincrticialdeath03.mp3",
+	"vo/soldier_paincrticialdeath04.mp3",
+}
+ENT.BeanTF2Zombs_SoundTbl_ScaredyCat = {
 	"vo/soldier_sf12_scared01.mp3",
 	"vo/soldier_mvm_loot_rare01.mp3",
 	"vo/soldier_sf13_influx_big02.mp3"
 }
-ENT.SoundTbl_Incoming = "vo/soldier_incoming01.mp3"
 ENT.BeanTF2Zombs_NextTauntTime = CurTime()
 ENT.BeanTF2Zombs_TotalKills = 0
 -- ENT.BeanTF2Zombs_Scared = false
 -- ENT.BeanTF2Zombs_FearLevel = 0
 ENT.BeanTF2Zombs_WeaponAttachment = "weapon_bone"
---------------------
--- function ENT:PreInit()
-	-- if GetConVar("vj_blboh_spawn_sequences"):GetInt() == 1 && self.BLBOH_CanDoSpawnSequence && GetConVar("ai_disabled"):GetInt() == 0 then
-		-- self.BLBOH_DoSpawnSequence = true
-	-- end
--- end
 --------------------
 function ENT:Init()
 
@@ -240,7 +234,7 @@ function ENT:OnThinkActive()
 			if v:GetClass() == "prop_combine_ball" && self:GetClass() == "npc_vj_btf2z_soldier" then
 				self:BeanTF2Zombs_Taunt("scaredycat")
 			else
-				self:PlaySoundSystem("Speech",self.SoundTbl_Incoming)
+				self:PlaySoundSystem("Speech",self.BeanTF2Zombs_SoundTbl_Incoming)
 				self:PlayAnim("vjges_gesture_melee_help")
 			end
 		end
@@ -255,17 +249,17 @@ function ENT:OnThinkActive()
 	if IsValid(self:GetEnemy()) && self.BeanTF2Zombs_NextTauntTime < CurTime() && math.random(1,125) == 1 then
 		self.BeanTF2Zombs_NextTauntTime = CurTime() + math.random(5,20)
 		if self:GetPos():Distance(self:GetEnemy():GetPos()) <= 300 then
-			self:PlaySoundSystem("Speech",self.SoundTbl_MeleeTaunt)
+			self:PlaySoundSystem("Speech",self.BeanTF2Zombs_SoundTbl_MeleeTaunt)
 			self:PlayAnim("vjges_gesture_melee_cheer")
 		elseif BeanTF2Zombs_NPCsConsideredSentries[self:GetEnemy():GetClass()] then
-			self:PlaySoundSystem("Speech",self.SoundTbl_SentryAhead)
+			self:PlaySoundSystem("Speech",self.BeanTF2Zombs_SoundTbl_SentryAhead)
 			self:PlayAnim("vjges_gesture_melee_go")
 		else
 			if math.random(1,2) == 1 then
-				self:PlaySoundSystem("Speech",self.SoundTbl_GoMove)
+				self:PlaySoundSystem("Speech",self.BeanTF2Zombs_SoundTbl_GoMove)
 				self:PlayAnim("vjges_gesture_melee_go")
 			else
-				self:PlaySoundSystem("Speech",self.SoundTbl_BattleCry)
+				self:PlaySoundSystem("Speech",self.BeanTF2Zombs_SoundTbl_BattleCry)
 				self:PlayAnim("vjges_gesture_melee_cheer")
 			end
 		end
@@ -282,10 +276,6 @@ function ENT:OnThinkActive()
 
 end
 --------------------
--- function ENT:OnAlert(ent)
-	-- self.BLBOH_Wretch_TauntCooldown = CurTime() + math.random(5,15)
--- end
---------------------
 function ENT:OnCallForHelp(ally, isFirst)
 	self:PlayAnim("vjges_gesture_melee_help")
 end
@@ -294,13 +284,11 @@ function ENT:BeanTF2Zombs_Taunt(specifictaunt)
 
 	if specifictaunt == "scaredycat" then
 
-		-- self:PlayAnim("vjseq_layer_taunt_laugh", true, 5)
-		-- self:PlayAnim("vjseq_layer_taunt_the_scaredycat_soldier", true, 5)
 		self:PlayAnim("vjseq_layer_taunt_the_scaredycat_soldier", true, 5)
-		self:PlaySoundSystem("Speech",self.SoundTbl_Death_Critical)
+		self:PlaySoundSystem("Speech",self.BeanTF2Zombs_SoundTbl_Death_Critical)
 		self.WeaponModel:SetNoDraw(true)
 		timer.Simple(4,function() if IsValid(self) then
-			self:PlaySoundSystem("Speech",self.SoundTbl_ScaredyCat)
+			self:PlaySoundSystem("Speech",self.BeanTF2Zombs_SoundTbl_ScaredyCat)
 		end end)
 		timer.Simple(5,function() if IsValid(self) then
 			self.WeaponModel:SetNoDraw(false)
@@ -393,7 +381,6 @@ function ENT:OnKilledEnemy(ent, inflictor, wasLast)
 
 	-- self.BeanTF2Zombs_TotalKills = self.BeanTF2Zombs_TotalKills + 1
 
-	-- if math.random(1,1) == 1 && (!IsValid(self:GetEnemy()) or (IsValid(self:GetEnemy()) && (self:GetPos():Distance(self:GetEnemy():GetPos()) >= 500 or !self:GetEnemy().VJ_ID_Living))) then
 	if BeanTF2Zombs_NPCsConsideredBuildings[ent:GetClass()] then
 		-- i feel like there's a better way to do this but i don't know it
 		self.BeanTF2Zombs_OriginalKilledEnemyLines = self.SoundTbl_KilledEnemy
@@ -551,7 +538,7 @@ function ENT:OnDamaged(dmginfo, hitgroup, status)
 	if self:IsOnFire() && self.BeanTF2Zombs_NextFirePainTime < CurTime() && self.BeanTF2Zombs_CanPlayBurningVoiceLine && self.HasPainSounds && self:GetClass() != "npc_vj_btf2z_pyro" then
 		self.BeanTF2Zombs_CanPlayBurningVoiceLine = false
 		self.BeanTF2Zombs_PlayingBurningVoiceLine = true
-		self:PlaySoundSystem("Pain",self.SoundTbl_Pain_Fire)
+		self:PlaySoundSystem("Pain",self.BeanTF2Zombs_SoundTbl_Pain_Fire)
 		timer.Simple(0.1,function() if IsValid(self) then
 			self.HasPainSounds = false
 		end end)
@@ -561,16 +548,16 @@ function ENT:OnDamaged(dmginfo, hitgroup, status)
 		end end)
 	else
 		if self.HasPainSounds && !self.BeanTF2Zombs_PlayingBurningVoiceLine then
-			timer.Simple(0.001,function() if IsValid(self) then
+			if dmginfo:GetDamage() > 35 then
+				self:PlaySoundSystem("Pain",self.SoundTbl_Death)
+			end
+			timer.Simple(0.0001,function() if IsValid(self) then
 				self:PlayAnim(self.AnimTbl_Flinch)
 				self.HasPainSounds = false
 			end end)
 			timer.Simple(0.465,function() if IsValid(self) then
 				self.HasPainSounds = true
 			end end)
-			if dmginfo:GetDamage() > 35 then
-				self:PlaySoundSystem("Pain",self.SoundTbl_Death)
-			end
 		end
 	end
 
@@ -592,7 +579,7 @@ function ENT:OnDeath(dmginfo, hitgroup, status)
 		end
 
 		if dmginfo:GetDamage() >= 80 or dmginfo:IsDamageType(DMG_CLUB + DMG_SLASH + DMG_CRUSH) then
-			self.SoundTbl_Death = self.SoundTbl_Death_Critical
+			self.SoundTbl_Death = self.BeanTF2Zombs_SoundTbl_Death_Critical
 		end
 
 		if self:IsOnFire() && math.random(1,3) == 1 then
@@ -606,6 +593,7 @@ function ENT:OnDeath(dmginfo, hitgroup, status)
 			-- self.AnimTbl_Death = "vjseq_primary_death_backstab"
 		-- end
 		-- this check passes if
+		-- - The attacker is a Player, NPC, or NextBot
 		-- - The attacker is behind us
 		-- - The attacker is aiming at us
 		-- - The attacker did CLUB, SLASH, or CRUSH damage

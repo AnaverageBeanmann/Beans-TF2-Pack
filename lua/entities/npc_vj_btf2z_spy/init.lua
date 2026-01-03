@@ -7,14 +7,22 @@ ENT.Model = {
 	"models/lazy_zombies_v1/spy.mdl"
 }
 ENT.StartHealth = 125
+ENT.ControllerParams = {
+	ThirdP_Offset = Vector(20, 0, -30),
+	FirstP_Bone = "bip_head",
+	FirstP_Offset = Vector(0, 0, 0), 
+	FirstP_ShrinkBone = true,
+}
 --------------------
-ENT.MeleeAttackDamage = 40
+ENT.MeleeAttackDamage = 20
 ENT.AnimTbl_MeleeAttack = "vjges_melee_swing"
 -- ENT.MeleeAttackDistance = 45
 -- ENT.MeleeAttackDamageDistance = 60
 ENT.TimeUntilMeleeAttackDamage = 0.2
 -- ENT.NextMeleeAttackTime = 0.8
 --------------------
+ENT.FootstepSoundTimerWalk = 0.25
+ENT.FootstepSoundTimerRun = 0.25
 ENT.SoundTbl_MedicReceiveHeal = {
 	"vo/spy_thanksfortheheal01.mp3",
 	"vo/spy_thanksfortheheal02.mp3",
@@ -49,11 +57,6 @@ ENT.SoundTbl_Pain = {
 	"vo/spy_painsharp03.mp3",
 	"vo/spy_painsharp04.mp3"
 }
-ENT.SoundTbl_Pain_Fire = {
-	"vo/spy_autoonfire01.mp3",
-	"vo/spy_autoonfire02.mp3",
-	"vo/spy_autoonfire03.mp3",
-}
 ENT.SoundTbl_Death = {
 	"vo/spy_painsevere01.mp3",
 	"vo/spy_painsevere02.mp3",
@@ -61,25 +64,13 @@ ENT.SoundTbl_Death = {
 	"vo/spy_painsevere04.mp3",
 	"vo/spy_painsevere05.mp3"
 }
-ENT.SoundTbl_Death_Critical = {
-	"vo/spy_paincrticialdeath01.mp3",
-	"vo/spy_paincrticialdeath02.mp3",
-	"vo/spy_paincrticialdeath03.mp3"
-}
 --------------------
-ENT.SoundTbl_BattleCry = {
+ENT.BeanTF2Zombs_SoundTbl_BattleCry = {
 	"vo/spy_battlecry01.mp3",
 	"vo/spy_battlecry03.mp3",
 	"vo/spy_battlecry04.mp3"
 }
-ENT.SoundTbl_GoMove = {
-	"vo/spy_go01.mp3",
-	"vo/spy_go02.mp3",
-	"vo/spy_go03.mp3",
-	"vo/spy_moveup01.mp3",
-	"vo/spy_moveup02.mp3"
-}
-ENT.SoundTbl_MeleeTaunt = {
+ENT.BeanTF2Zombs_SoundTbl_MeleeTaunt = {
 	"vo/spy_meleedare01.mp3",
 	"vo/spy_meleedare02.mp3",
 	"vo/spy_specialcompleted09.mp3",
@@ -88,14 +79,31 @@ ENT.SoundTbl_MeleeTaunt = {
 	"vo/taunts/spy_taunts11.mp3",
 	"vo/taunts/spy_taunts13.mp3"
 }
-ENT.SoundTbl_SentryAhead = {
-	"vo/spy_sentryahead01.mp3",
-	"vo/spy_sentryahead02.mp3"
+ENT.BeanTF2Zombs_SoundTbl_GoMove = {
+	"vo/spy_go01.mp3",
+	"vo/spy_go02.mp3",
+	"vo/spy_go03.mp3",
+	"vo/spy_moveup01.mp3",
+	"vo/spy_moveup02.mp3"
 }
-ENT.SoundTbl_Incoming = {
+ENT.BeanTF2Zombs_SoundTbl_Incoming = {
 	"vo/spy_incoming01.mp3",
 	"vo/spy_incoming02.mp3",
 	"vo/spy_incoming03.mp3"
+}
+ENT.BeanTF2Zombs_SoundTbl_SentryAhead = {
+	"vo/spy_sentryahead01.mp3",
+	"vo/spy_sentryahead02.mp3"
+}
+ENT.BeanTF2Zombs_SoundTbl_Pain_Fire = {
+	"vo/spy_autoonfire01.mp3",
+	"vo/spy_autoonfire02.mp3",
+	"vo/spy_autoonfire03.mp3",
+}
+ENT.BeanTF2Zombs_SoundTbl_Death_Critical = {
+	"vo/spy_paincrticialdeath01.mp3",
+	"vo/spy_paincrticialdeath02.mp3",
+	"vo/spy_paincrticialdeath03.mp3"
 }
 ENT.BeanTF2Zombs_SpyMeleeTauntLines = {
 	"vo/taunts/spy_taunts02.mp3",
