@@ -1,7 +1,7 @@
-Current Version: Alpha 0.1
+Current Version: Alpha 0.1.1
 
 Contains:
-- 9 basic Zombie NPCs (one for each Merc)
+- 9 basic Zombie NPCs (one for each Merc) + WIP Pumpkin Bomb
 - Battle cry system
 - Kill voice line system + Domination voice lines
 - Taunt system
