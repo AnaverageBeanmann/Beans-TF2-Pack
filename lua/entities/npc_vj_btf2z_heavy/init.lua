@@ -167,11 +167,11 @@ function ENT:BeanTF2Zombs_Taunt()
 	if math.random(1,5) == 1 then
 
 		self:PlayAnim("vjseq_layer_taunt_laugh", true, 5)
-		self.WeaponModel:SetNoDraw(true)
+		-- self.WeaponModel:SetNoDraw(true)
 		self:PlaySoundSystem("Speech","vo/heavy_laugherbigsnort01.mp3")
-		timer.Simple(5,function() if IsValid(self) then
-			self.WeaponModel:SetNoDraw(false)
-		end end)
+		-- timer.Simple(5,function() if IsValid(self) then
+			-- self.WeaponModel:SetNoDraw(false)
+		-- end end)
 
 	else
 
