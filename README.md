@@ -1,4 +1,4 @@
-Current Version: Alpha 0.1.1
+Current Version: Alpha 0.1.3
 
 Contains:
 - 9 basic Zombie NPCs (one for each Merc) + WIP Pumpkin Bomb
