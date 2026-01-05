@@ -29,6 +29,11 @@ ENT.AnimTbl_MeleeAttack = "vjges_layer_melee_swing"
 --------------------
 ENT.FootstepSoundTimerWalk = 0.25
 ENT.FootstepSoundTimerRun = 0.25
+ENT.SoundTbl_ReceiveOrder = {
+	"vo/medic_yes01.mp3",
+	"vo/medic_yes02.mp3",
+	"vo/medic_yes03.mp3"
+}
 ENT.SoundTbl_MedicReceiveHeal = {
 	"vo/medic_thanksfortheheal01.mp3",
 	"vo/medic_thanksfortheheal02.mp3"

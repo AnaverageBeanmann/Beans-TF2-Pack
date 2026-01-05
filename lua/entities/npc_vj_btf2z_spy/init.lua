@@ -23,6 +23,11 @@ ENT.TimeUntilMeleeAttackDamage = 0.2
 --------------------
 ENT.FootstepSoundTimerWalk = 0.25
 ENT.FootstepSoundTimerRun = 0.25
+ENT.SoundTbl_ReceiveOrder = {
+	"vo/spy_yes01.mp3",
+	"vo/spy_yes02.mp3",
+	"vo/spy_yes03.mp3"
+}
 ENT.SoundTbl_MedicReceiveHeal = {
 	"vo/spy_thanksfortheheal01.mp3",
 	"vo/spy_thanksfortheheal02.mp3",
@@ -109,6 +114,7 @@ ENT.BeanTF2Zombs_SpyMeleeTauntLines = {
 	"vo/taunts/spy_taunts02.mp3",
 	"vo/taunts/spy_taunts09.mp3"
 }
+ENT.BeanTF2Zombs_SpyBackstabBackupDamage = 1
 --------------------
 function ENT:Init()
 
@@ -142,6 +148,32 @@ function ENT:Init()
 		self:SetSkin(1)
 	end
 
+	timer.Simple(0.1, function() if IsValid(self) then
+		self.BeanTF2Zombs_SpyBackstabBackupDamage = self.MeleeAttackDamage
+	end end)
+
+end
+--------------------
+function ENT:OnMeleeAttack(status, enemy)
+	if status == "PreInit" then
+		if (self:GetEnemy():GetForward():Dot((self:GetPos() -self:GetEnemy():GetPos()):GetNormalized()) < math.cos(math.rad(100))) && self.AnimTbl_MeleeAttack == "vjges_melee_swing" then
+			self.AnimTbl_MeleeAttack = "vjges_melee_overhand_swing"
+			self.TimeUntilMeleeAttackDamage = 0.125
+			timer.Simple(0.15, function() if IsValid(self) then
+				self.AnimTbl_MeleeAttack = "vjges_melee_swing"
+				self.TimeUntilMeleeAttackDamage = 0.2
+			end end)
+		end
+	end
+end
+--------------------
+function ENT:OnMeleeAttackExecute(status, ent, isProp)
+	if status == "PreDamage" && self.AnimTbl_MeleeAttack == "vjges_melee_overhand_swing" then
+		self.MeleeAttackDamage = ent:Health() * 6
+		timer.Simple(0.05, function() if IsValid(self) then
+			self.MeleeAttackDamage = self.BeanTF2Zombs_SpyBackstabBackupDamage
+		end end)
+	end
 end
 --------------------
 function ENT:BeanTF2Zombs_Taunt()

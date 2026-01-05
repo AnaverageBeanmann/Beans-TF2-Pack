@@ -22,6 +22,7 @@ ENT.TimeUntilMeleeAttackDamage = 0.4
 --------------------
 ENT.FootstepSoundTimerWalk = 0.25
 ENT.FootstepSoundTimerRun = 0.25
+ENT.SoundTbl_ReceiveOrder = "vo/pyro_yes01"
 ENT.SoundTbl_MedicReceiveHeal = "vo/pyro_thanksfortheheal01.mp3"
 ENT.SoundTbl_CallForHelp = "vo/pyro_helpme01.mp3"
 ENT.SoundTbl_MeleeAttackMiss = "weapons/cbar_miss1.wav"

@@ -248,7 +248,7 @@ function ENT:OnThinkActive()
 
 	if IsValid(self:GetEnemy()) && self.BeanTF2Zombs_NextTauntTime < CurTime() && math.random(1,125) == 1 then
 		self.BeanTF2Zombs_NextTauntTime = CurTime() + math.random(5,20)
-		if self:GetPos():Distance(self:GetEnemy():GetPos()) <= 300 then
+		if self:GetPos():Distance(self:GetEnemy():GetPos()) <= 300 && self:Visible(self:GetEnemy()) then
 			self:PlaySoundSystem("Speech",self.BeanTF2Zombs_SoundTbl_MeleeTaunt)
 			self:PlayAnim("vjges_gesture_melee_cheer")
 		elseif BeanTF2Zombs_NPCsConsideredSentries[self:GetEnemy():GetClass()] then

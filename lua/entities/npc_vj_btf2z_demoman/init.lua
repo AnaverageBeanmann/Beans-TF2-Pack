@@ -24,10 +24,9 @@ ENT.TimeUntilMeleeAttackDamage = 0.325
 ENT.FootstepSoundTimerWalk = 0.25
 ENT.FootstepSoundTimerRun = 0.25
 ENT.SoundTbl_ReceiveOrder = {
-	"vo/soldier_yes01.mp3",
-	"vo/soldier_yes02.mp3",
-	"vo/soldier_yes03.mp3",
-	"vo/soldier_yes04.mp3"
+	"vo/demoman_yes01.mp3",
+	"vo/demoman_yes02.mp3",
+	"vo/demoman_yes03.mp3"
 }
 ENT.SoundTbl_MedicReceiveHeal = {
 	"vo/demoman_thanksfortheheal01.mp3",
